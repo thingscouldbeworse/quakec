@@ -35,6 +35,8 @@ void() touch_perk;
 void(entity ent) MBOX_FreeEnt;
 entity() MBOX_GetFreeEnt;
 void() MBOX_Touch;
+void(float) Zoning_UpdateAllZones;
+float zone_timer;
 
 //
 // GameRestart_CleanPowerUps()
@@ -285,6 +287,10 @@ void() GameRestart_OpenClosedDoors =
 
 		door = findfloat(world, isopen, true);
 	}
+
+	// Doors are now closed; force zoning to rebuild spawn activation based on closed doors.
+	zone_timer = 0;
+	Zoning_UpdateAllZones(true);
 }
 
 //
